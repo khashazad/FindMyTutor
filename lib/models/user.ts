@@ -1,4 +1,4 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 
 export interface UserEntity extends Document {
   _id: string;
@@ -43,4 +43,4 @@ export const UserUniquePhoneNumberIndex = "phoneNumber_1";
 UserSchema.index({ email: 1 }, { unique: true });
 UserSchema.index({ phoneNumber: 1 }, { unique: true });
 
-export default model("User", UserSchema);
+export default models.User || model("User", UserSchema);

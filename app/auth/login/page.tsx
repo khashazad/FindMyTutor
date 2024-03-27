@@ -1,6 +1,4 @@
 "use client";
-import Link from "next/link";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,36 +7,41 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { TSignupSchema, signupSchema } from "@/lib/validations/auth-validation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
 } from "@/components/ui/form";
-
-import axios from "axios";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { TLoginSchema, loginSchema } from "@/lib/validations/auth-validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-export default function RegisterPage() {
+export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
-  const form = useForm<TSignupSchema>({
-    resolver: zodResolver(signupSchema),
+  const form = useForm<TLoginSchema>({
+    resolver: zodResolver(loginSchema),
   });
 
   const { handleSubmit } = form;
 
-  const onSubmit = async (data: TSignupSchema) => {
+  const onSubmit = async (data: TLoginSchema) => {
     setLoading(true);
     try {
-      await axios.post(`http://localhost:3000/api/auth/register`, data);
+      signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: true,
+        callbackUrl: "http://localhost:3000",
+      });
     } catch (error: any) {
       let message = "An error occurred while registering your account";
 
@@ -54,47 +57,14 @@ export default function RegisterPage() {
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
-        <CardTitle className="text-xl">Sign Up</CardTitle>
+        <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>
-          Enter your information to create an account
+          Enter your email below to login to your account
         </CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
           <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="grid gap-2">
-                <FormLabel>First Name</FormLabel>
-                <FormField
-                  control={form.control}
-                  name="firstName"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-grow-1 items-center gap-4 ">
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="grid gap-2">
-                <FormLabel>Last Name</FormLabel>
-                <FormField
-                  control={form.control}
-                  name="lastName"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-grow-1 items-center gap-4 ">
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
-
             <div className="grid gap-2">
               <FormLabel>Email</FormLabel>
               <FormField
@@ -111,21 +81,6 @@ export default function RegisterPage() {
               />
             </div>
 
-            <div className="grid gap-2">
-              <FormLabel>Phone Number</FormLabel>
-              <FormField
-                control={form.control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <FormItem className="flex flex-grow-1 items-center gap-4 ">
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
             <div className="grid gap-2">
               <FormLabel>Password</FormLabel>
               <FormField
@@ -152,13 +107,13 @@ export default function RegisterPage() {
                   "bg-gray-900 text-white outline-none transition-all hover:scale-105 hover:bg-gray-950 focus:scale-110 active:scale-105 ",
                 )}
               >
-                Create an account
+                Login
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
-              Already have an account?{" "}
-              <Link href="/auth/login" className="underline">
-                Sign in
+              Don&apos;t have an account?{" "}
+              <Link href="/auth/register" className="underline">
+                Sign up
               </Link>
             </div>
           </form>
