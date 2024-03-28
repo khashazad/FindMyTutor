@@ -23,9 +23,12 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm<TLoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -36,19 +39,21 @@ export default function LoginPage() {
   const onSubmit = async (data: TLoginSchema) => {
     setLoading(true);
     try {
-      signIn("credentials", {
+      const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
-        redirect: true,
-        callbackUrl: "http://localhost:3000",
+        redirect: false,
       });
+
+      if (result?.ok) router.push("/");
+      else toast.error("Invalid Credentials");
     } catch (error: any) {
-      let message = "An error occurred while registering your account";
+      let message = "An error occurred while signing into your account";
 
       if (error.response && error.response.data.message)
         message = error.response.data.message;
 
-      console.log(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }

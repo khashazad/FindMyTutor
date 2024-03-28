@@ -4,6 +4,9 @@ import Provider from "@/components/provider";
 import { cn } from "@/lib/utils";
 import { Inter as FontSans, Inter } from "next/font/google";
 import ThemeProvider from "@/context/theme-context";
+import { Toaster } from "react-hot-toast";
+import SiteHeader from "@/components/site-header";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,13 +31,17 @@ export default function RootLayout({
       className={cn("min-h-screen font-sans antialiased", fontSans.variable)}
     >
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          disableTransitionOnChange
-        >
-          <Provider>{children}</Provider>
-        </ThemeProvider>
+        <Provider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            disableTransitionOnChange
+          >
+            <Toaster position="top-right" />
+            <SiteHeader />
+            {children}
+          </ThemeProvider>
+        </Provider>
       </body>
     </html>
   );
