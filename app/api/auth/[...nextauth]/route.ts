@@ -60,10 +60,11 @@ export const authOptions: NextAuthOptions = {
       return user;
     },
 
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user: any }) {
       if (user) {
+        token.id = user._id;
         token.email = user.email;
-        token.name = user.name;
+        token.name = user.firstName;
         token.role = user.role;
       }
       return token;
@@ -71,6 +72,7 @@ export const authOptions: NextAuthOptions = {
 
     async session({ session, token }: { session: any; token: any }) {
       if (session.user) {
+        session.user.id = token.id;
         session.user.email = token.email;
         session.user.name = token.name;
         session.user.role = token.role;
@@ -81,6 +83,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET!,
   pages: {
     signIn: "/auth/login",
+    signOut: "/",
   },
 };
 

@@ -5,8 +5,7 @@ import { cn } from "@/lib/utils";
 import { Inter as FontSans, Inter } from "next/font/google";
 import ThemeProvider from "@/context/theme-context";
 import { Toaster } from "react-hot-toast";
-import SiteHeader from "@/components/site-header";
-import { SessionProvider } from "next-auth/react";
+import SiteHeader from "@/components/header/site-header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +27,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("min-h-screen font-sans antialiased", fontSans.variable)}
+      className={cn(
+        "min-h-[calc(100vh_-_4rem)] font-sans antialiased",
+        fontSans.variable,
+      )}
     >
       <body className={inter.className}>
         <Provider>

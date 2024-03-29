@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 
-import { Button } from "./ui/button";
-import { SheetTrigger, SheetContent, Sheet } from "./ui/sheet";
+import { Button } from "@/components/ui/button";
+import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet";
 import Image from "next/image";
 import Logo from "@/public/logo.png";
 import { Menu } from "lucide-react";

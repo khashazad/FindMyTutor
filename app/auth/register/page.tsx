@@ -69,7 +69,7 @@ export default function RegisterPage() {
                   control={form.control}
                   name="firstName"
                   render={({ field }) => (
-                    <FormItem className="flex flex-grow-1 items-center gap-4 ">
+                    <FormItem className="flex flex-col flex-grow-1 ">
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -84,7 +84,7 @@ export default function RegisterPage() {
                   control={form.control}
                   name="lastName"
                   render={({ field }) => (
-                    <FormItem className="flex flex-grow-1 items-center gap-4 ">
+                    <FormItem className="flex flex-col flex-grow-1 ">
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -101,7 +101,7 @@ export default function RegisterPage() {
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem className="flex flex-grow-1 items-center gap-4 ">
+                  <FormItem className="flex flex-col flex-grow-1">
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -117,7 +117,7 @@ export default function RegisterPage() {
                 control={form.control}
                 name="phoneNumber"
                 render={({ field }) => (
-                  <FormItem className="flex flex-grow-1 items-center gap-4 ">
+                  <FormItem className="flex flex-col flex-grow-1 items-center gap-1">
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -132,7 +132,7 @@ export default function RegisterPage() {
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem className="flex flex-grow-1 items-center gap-4 ">
+                  <FormItem className="flex flex-grow-1">
                     <FormControl>
                       <Input {...field} />
                     </FormControl>

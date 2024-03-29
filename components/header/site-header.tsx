@@ -1,18 +1,14 @@
+"use client";
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { useSession } from "next-auth/react";
-import { ThemeToggle } from "./theme-toggle";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
+import { ThemeToggle } from "@/components/theme-toggle";
 import Logo from "@/public/logo.png";
 import Image from "next/image";
-import { Button } from "./ui/button";
-import { SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import MobileHeader from "./mobile-header";
+import UserNav from "./user-nav";
+import { useSession } from "next-auth/react";
 
 export default function SiteHeader() {
-  const session = getServerSession(authOptions);
-
+  const session = useSession();
   return (
     <header className="sticky top-0 flex h-16 justify-between items-center gap-4 border-b bg-background px-4 md:px-6">
       {!session ? (
@@ -38,17 +34,14 @@ export default function SiteHeader() {
             >
               Browse Tutors
             </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              My Sessions
-            </Link>
           </nav>
           <MobileHeader />
         </div>
       )}
-      <ThemeToggle />
+      <div className="flex gap-4 items-center">
+        {session && <UserNav />}
+        <ThemeToggle />
+      </div>
     </header>
   );
 }

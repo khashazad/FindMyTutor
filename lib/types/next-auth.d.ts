@@ -4,8 +4,12 @@ import { UserEntity } from "@/lib/models/user";
 
 declare module "next-auth" {
   interface Session {
-    id: string;
-    role: number;
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      role: string;
+    };
   }
 
   interface User extends UserEntity {}
@@ -14,6 +18,8 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     id: string;
+    email: string;
+    name: string;
     role: number;
   }
 }
