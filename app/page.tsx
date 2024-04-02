@@ -29,8 +29,7 @@ export default function Home() {
           enthusiasts face the challenge of finding the right guidance to unlock
           their full potential. Enter "Find My Tutor," a revolutionary web
           application designed to bridge the gap between learners seeking to
-          broaden their horizons and the experts who can lead the way. With an
-          intuitive interface and a sophisticated matching algorithm, "Find My
+          broaden their horizons and the experts who can lead the way. "Find My
           Tutor" connects users with tutors and specialists across a wide range
           of subjects and fields. Whether you're struggling with calculus,
           diving into the depths of historical events, or mastering a new

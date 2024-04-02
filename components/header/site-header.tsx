@@ -8,16 +8,18 @@ import UserNav from "./user-nav";
 import { useSession } from "next-auth/react";
 
 export default function SiteHeader() {
-  const session = useSession();
+  const { status } = useSession();
+
+  const isAuthenticated = status === "authenticated";
   return (
     <header className="sticky top-0 flex h-16 justify-between items-center gap-4 border-b bg-background px-4 md:px-6">
-      {!session ? (
+      {!isAuthenticated ? (
         <h1>Welcome to Find My Tutor</h1>
       ) : (
         <div>
           <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
             <Link
-              href="#"
+              href="/"
               className="relative flex items-center gap-2 text-lg font-semibold md:text-base object-contain "
             >
               <Image
@@ -39,7 +41,7 @@ export default function SiteHeader() {
         </div>
       )}
       <div className="flex gap-4 items-center">
-        {session && <UserNav />}
+        {isAuthenticated && <UserNav />}
         <ThemeToggle />
       </div>
     </header>
