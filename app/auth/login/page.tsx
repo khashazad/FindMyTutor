@@ -76,11 +76,14 @@ export default function LoginPage() {
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col items-center ">
+                  <FormItem className="flex flex-col flex-grow-1 items-center">
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
-                    <FormMessage />
+
+                    <div className="h-1">
+                      <FormMessage />
+                    </div>
                   </FormItem>
                 )}
               />
@@ -92,11 +95,14 @@ export default function LoginPage() {
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col items-center">
+                  <FormItem className="flex flex-col flex-grow-1 items-center">
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
-                    <FormMessage />
+
+                    <div className="h-1">
+                      <FormMessage />
+                    </div>
                   </FormItem>
                 )}
               />
