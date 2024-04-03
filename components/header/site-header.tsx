@@ -6,6 +6,7 @@ import Image from "next/image";
 import MobileHeader from "./mobile-header";
 import UserNav from "./user-nav";
 import { useSession } from "next-auth/react";
+import { Button } from "@/components/ui/button";
 
 export default function SiteHeader() {
   const { status } = useSession();
@@ -14,7 +15,12 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 flex h-16 justify-between items-center gap-4 border-b bg-background px-4 md:px-6">
       {!isAuthenticated ? (
-        <h1>Welcome to Find My Tutor</h1>
+        <div className="flex gap-2 md:gap-4 items-center">
+          <h1>Welcome to Find My Tutor</h1>
+          <Button>
+            <Link href="/auth/login">Get Started</Link>
+          </Button>
+        </div>
       ) : (
         <div>
           <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
