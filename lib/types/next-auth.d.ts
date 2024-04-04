@@ -1,6 +1,6 @@
 import { Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
-import { UserEntity } from "@/lib/models/user";
+import { User } from "@/lib/models/user";
 
 declare module "next-auth" {
   interface Session {
@@ -12,7 +12,7 @@ declare module "next-auth" {
     };
   }
 
-  interface User extends UserEntity {}
+  interface User extends User {}
 }
 
 declare module "next-auth/jwt" {

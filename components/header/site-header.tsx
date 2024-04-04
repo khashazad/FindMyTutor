@@ -37,7 +37,7 @@ export default function SiteHeader() {
               />
             </Link>
             <Link
-              href="#"
+              href="/tutors"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               Browse Tutors

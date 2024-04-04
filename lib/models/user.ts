@@ -1,6 +1,6 @@
 import { Model, Schema, model, models, Types } from "mongoose";
 
-export interface UserEntity extends Document {
+export interface User extends Document {
   _id: string;
   email: string;
   password: string;
@@ -8,17 +8,18 @@ export interface UserEntity extends Document {
   lastName: string;
   role: number;
   phoneNumber: string;
-  bio: string;
+  about: string;
   expertise: Types.Array<string>;
   rating: number;
+  hourlyRate: number;
 }
 
-interface UserModel extends Model<UserEntity> {}
+interface UserModel extends Model<User> {}
 
 /**
  * Defines the schema for the User entity.
  */
-export const UserSchema = new Schema<UserEntity, UserModel>(
+export const UserSchema = new Schema<User, UserModel>(
   {
     email: {
       type: String,
@@ -30,9 +31,10 @@ export const UserSchema = new Schema<UserEntity, UserModel>(
     lastName: { type: String, required: true },
     role: { type: Number, required: true },
     phoneNumber: { type: String, required: true },
-    bio: { type: String, required: false },
+    about: { type: String, required: false },
     expertise: { type: [String], required: false },
-    rating: { type: Number, required: false },
+    rating: { type: Number, required: false, default: 0 },
+    hourlyRate: { type: Number, required: true },
   },
   {
     timestamps: true, // This enables automatic createdAt and updatedAt fields
