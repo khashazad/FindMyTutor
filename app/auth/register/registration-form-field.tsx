@@ -6,15 +6,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { TStudentSignupSchema } from "@/lib/validations/auth-validation";
+import { TTutorSignupSchema } from "@/lib/validations/auth-validation";
 import { Control } from "react-hook-form";
 
 type RegistrationFormFieldProps = {
   label: string;
-  name: keyof TStudentSignupSchema;
-  control: Control<TStudentSignupSchema>;
+  name: keyof TTutorSignupSchema;
+  control: Control<TTutorSignupSchema>;
 };
-export default function TutorRegistrationFormField({
+export default function RegistrationFormField({
   label,
   name,
   control,
@@ -26,11 +26,11 @@ export default function TutorRegistrationFormField({
         control={control}
         name={name}
         render={({ field }) => (
-          <FormItem className="flex flex-col flex-grow-1 items-center">
+          <FormItem className="flex flex-col flex-grow-1 pb-4">
             <FormControl>
               <Input {...field} />
             </FormControl>
-            <div className="h-1">
+            <div className="flex justify-start h-1">
               <FormMessage />
             </div>
           </FormItem>

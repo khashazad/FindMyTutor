@@ -28,7 +28,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Categories } from "@/lib/types/types";
-import TutorRegistrationFormField from "./tutor-registration-form-field";
+import RegistrationFormField from "../registration-form-field";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
@@ -38,7 +38,6 @@ export default function TutorRegistrationForm() {
   const [step, setStep] = useState(0);
   const [expertise, setExpertise] = useState<string[]>([]);
 
-  console.log(expertise);
   const form = useForm<TTutorSignupSchema>({
     resolver: zodResolver(tutorSignupSchema),
   });
@@ -70,30 +69,30 @@ export default function TutorRegistrationForm() {
       <form className="grid mt-8" onSubmit={handleSubmit(onSubmit)}>
         <div className={cn("flex-col gap-4", step === 1 ? "hidden" : "flex")}>
           <div className={cn("grid grid-cols-2 gap-4")}>
-            <TutorRegistrationFormField
+            <RegistrationFormField
               label="First Name"
               name="firstName"
               control={form.control}
             />
-            <TutorRegistrationFormField
+            <RegistrationFormField
               label="Last Name"
               name="lastName"
               control={form.control}
             />
           </div>
 
-          <TutorRegistrationFormField
+          <RegistrationFormField
             label="Email"
             name="email"
             control={form.control}
           />
 
-          <TutorRegistrationFormField
+          <RegistrationFormField
             label="Phone Number"
             name="phoneNumber"
             control={form.control}
           />
-          <TutorRegistrationFormField
+          <RegistrationFormField
             label="Password"
             name="password"
             control={form.control}
@@ -104,9 +103,16 @@ export default function TutorRegistrationForm() {
         </div>
 
         <div className={cn(step === 0 ? "hidden" : "flex flex-col gap-4")}>
+          <RegistrationFormField
+            label="Rate"
+            name="hourlyRate"
+            control={form.control}
+          />
+
+          <FormLabel>Expertise</FormLabel>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">Select Expertise</Button>
+              <Button variant="outline">Select</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuLabel>Expertise</DropdownMenuLabel>
@@ -133,12 +139,12 @@ export default function TutorRegistrationForm() {
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="grid gap-2">
+            <FormLabel>About</FormLabel>
             <FormField
               control={form.control}
-              name="bio"
+              name="about"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Bio</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Tell us a little bit about yourself"
@@ -146,10 +152,11 @@ export default function TutorRegistrationForm() {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
                   <FormDescription>
                     This will appear when students are visiting your profile
                   </FormDescription>
+
+                  <FormMessage />
                 </FormItem>
               )}
             />

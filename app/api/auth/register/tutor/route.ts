@@ -13,11 +13,10 @@ export async function POST(request: NextRequest) {
       email,
       password,
       phoneNumber,
-      bio,
+      about,
       expertise,
+      fee,
     } = await request.json();
-
-    console.log(expertise);
 
     const user = await User.findOne({ email });
 
@@ -37,9 +36,10 @@ export async function POST(request: NextRequest) {
       email,
       phoneNumber,
       password: hashedPassword,
-      bio,
+      about,
       expertise,
       role: 0,
+      fee,
     });
 
     const savedUser = await newUser.save();

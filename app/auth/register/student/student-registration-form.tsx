@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import toast from "react-hot-toast";
-import StudentRegistrationFormField from "./student-registration-form-field";
+import RegistrationFormField from "../registration-form-field";
 
 export default function StudentRegistrationForm() {
   const [loading, setLoading] = useState(false);
@@ -45,30 +45,30 @@ export default function StudentRegistrationForm() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className={cn("grid grid-cols-2 gap-4")}>
-          <StudentRegistrationFormField
+          <RegistrationFormField
             label="First Name"
             name="firstName"
             control={form.control}
           />
-          <StudentRegistrationFormField
+          <RegistrationFormField
             label="Last Name"
             name="lastName"
             control={form.control}
           />
         </div>
 
-        <StudentRegistrationFormField
+        <RegistrationFormField
           label="Email"
           name="email"
           control={form.control}
         />
 
-        <StudentRegistrationFormField
+        <RegistrationFormField
           label="Phone Number"
           name="phoneNumber"
           control={form.control}
         />
-        <StudentRegistrationFormField
+        <RegistrationFormField
           label="Password"
           name="password"
           control={form.control}
