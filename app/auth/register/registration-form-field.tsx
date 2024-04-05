@@ -26,11 +26,11 @@ export default function RegistrationFormField({
         control={control}
         name={name}
         render={({ field }) => (
-          <FormItem className="flex flex-col flex-grow-1 pb-4">
+          <FormItem className="flex flex-col flex-grow-1 pb-1">
             <FormControl>
               <Input {...field} />
             </FormControl>
-            <div className="flex justify-start h-1">
+            <div className="flex justify-end h-1">
               <FormMessage />
             </div>
           </FormItem>

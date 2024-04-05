@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       phoneNumber,
       about,
       expertise,
-      fee,
+      hourlyRate,
     } = await request.json();
 
     const user = await User.findOne({ email });
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       about,
       expertise,
       role: 0,
-      fee,
+      hourlyRate,
     });
 
     const savedUser = await newUser.save();

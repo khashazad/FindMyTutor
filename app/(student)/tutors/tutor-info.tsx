@@ -9,29 +9,36 @@ type TutorInfoProps = {
   tutor: User;
 };
 
-export default async function TutorInfo({ tutor }: TutorInfoProps) {
+export default function TutorInfo({ tutor }: TutorInfoProps) {
   return (
-    <Card className="w-[400px]">
+    <Card className="w-[400px] bg-teal-900/80 dark:bg-cyan-950 dark:bg-opacity-70">
       <CardHeader className="flex flex-col gap-2">
-        <CardTitle>{`${tutor.firstName} ${tutor.lastName}`}</CardTitle>
-        <div className="pt-1">
+        <CardTitle className="text-3xl">{`${tutor.firstName} ${tutor.lastName}`}</CardTitle>
+        <div className="flex justify-between items-center">
           <StarRating rating={tutor.rating || 0} />
+          <span className="text-2xl font-bold">{`${tutor.hourlyRate}$ / hour`}</span>
         </div>
       </CardHeader>
 
       <CardContent className="flex flex-col gap-2">
-        <div className="flex flex-start justify-between"></div>
-        <Separator className="my-1" orientation="horizontal" />
+        <Separator
+          className="my-1 h-[0.20rem] bg-black/30"
+          orientation="horizontal"
+        />
         <SectionHeader title="Expertise" />
         <div className="flex flex-wrap gap-4">
           {tutor.expertise.map((ex) => {
             return <Badge className="py-1 px-3 text-sm size-min">{ex}</Badge>;
           })}
         </div>
-        <Separator className="my-3" orientation="horizontal" />
+
+        <Separator
+          className="mt-3 h-[0.20rem] bg-black/30"
+          orientation="horizontal"
+        />
         <SectionHeader title={`About`} />
-        <div className="bg-gray-800/50 text-black dark:text-white dark:bg-white/10 rounded-md px-4 py-2 text-md font-semibold tracking-wide shadow-black/20 dark:shadow-white/30 shadow-sm">
-          {tutor.bio}
+        <div className="-m-2 text-center bg-white/50 text-black dark:text-white dark:bg-white/20 rounded-md px-4 py-2 text-md font-semibold tracking-wide shadow-black/20 dark:shadow-black/80 shadow-sm flex-1">
+          {tutor.about}
         </div>
       </CardContent>
     </Card>

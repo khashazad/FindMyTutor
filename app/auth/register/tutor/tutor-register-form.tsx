@@ -31,6 +31,7 @@ import { Categories } from "@/lib/types/types";
 import RegistrationFormField from "../registration-form-field";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { Input } from "@/components/ui/input";
 
 export default function TutorRegistrationForm() {
   const router = useRouter();
@@ -103,12 +104,23 @@ export default function TutorRegistrationForm() {
         </div>
 
         <div className={cn(step === 0 ? "hidden" : "flex flex-col gap-4")}>
-          <RegistrationFormField
-            label="Rate"
-            name="hourlyRate"
-            control={form.control}
-          />
-
+          <div className="grid gap-2">
+            <FormLabel>Hourly Rate</FormLabel>
+            <FormField
+              control={form.control}
+              name="hourlyRate"
+              render={({ field }) => (
+                <FormItem className="flex flex-col flex-grow-1 pb-1">
+                  <FormControl>
+                    <Input {...field} type="number" />
+                  </FormControl>
+                  <div className="flex justify-end h-1">
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
+          </div>
           <FormLabel>Expertise</FormLabel>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

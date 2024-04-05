@@ -1,4 +1,4 @@
-import { TypeOf, object, string, number } from "zod";
+import { TypeOf, object, string, number, preprocess } from "zod";
 
 export const studnetSignupSchema = object({
   email: string({ required_error: "Email is required" }).email({
@@ -36,11 +36,16 @@ export const tutorSignupSchema = object({
   password: string({ required_error: "Password is required" })
     .min(8, "Password must contain at least 8 characters")
     .max(20, "Password cannot exceed 20 characters"),
-  about: string().optional(),
-  hourlyRate: number({
-    required_error: "You must specify your hourly rate",
-    invalid_type_error: "Hourly rate must be a number",
-  }).positive("Hourly rate must be positive"),
+  about: string({
+    required_error: "Please write a few sentences about yourself",
+  }),
+  hourlyRate: preprocess(
+    (a) => parseInt(string().parse(a), 10),
+    number({
+      required_error: "You must specify your hourly rate",
+      invalid_type_error: "Hourly rate must be a number",
+    }).positive("Hourly rate must be positive"),
+  ),
 });
 
 export type TTutorSignupSchema = TypeOf<typeof tutorSignupSchema>;

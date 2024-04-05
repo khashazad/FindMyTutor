@@ -34,7 +34,7 @@ export const UserSchema = new Schema<User, UserModel>(
     about: { type: String, required: false },
     expertise: { type: [String], required: false },
     rating: { type: Number, required: false, default: 0 },
-    hourlyRate: { type: Number, required: true },
+    hourlyRate: { type: Number, required: false },
   },
   {
     timestamps: true, // This enables automatic createdAt and updatedAt fields
