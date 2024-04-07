@@ -4,6 +4,8 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeader } from "./section-header";
 import { StarRating } from "@/components/rating-star";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type TutorInfoProps = {
   tutor: User;
@@ -11,7 +13,7 @@ type TutorInfoProps = {
 
 export default function TutorInfo({ tutor }: TutorInfoProps) {
   return (
-    <Card className="w-[400px] bg-teal-900/80 dark:bg-cyan-950 dark:bg-opacity-70">
+    <Card className="w-[400px] bg-teal-700/70 dark:bg-cyan-950 dark:bg-opacity-70">
       <CardHeader className="flex flex-col gap-2">
         <CardTitle className="text-3xl">{`${tutor.firstName} ${tutor.lastName}`}</CardTitle>
         <div className="flex justify-between items-center">
@@ -40,6 +42,16 @@ export default function TutorInfo({ tutor }: TutorInfoProps) {
         <div className="-m-2 text-center bg-white/50 text-black dark:text-white dark:bg-white/20 rounded-md px-4 py-2 text-md font-semibold tracking-wide shadow-black/20 dark:shadow-black/80 shadow-sm flex-1">
           {tutor.about}
         </div>
+        <Separator
+          className="mt-6 h-[0.20rem] bg-black/30"
+          orientation="horizontal"
+        />
+        <Button
+          variant="outline"
+          className="bg-primary-foreground/80 text-md grow font-semibold"
+        >
+          <Link href={`/requests/new/${tutor._id}`}>Request Session</Link>
+        </Button>
       </CardContent>
     </Card>
   );

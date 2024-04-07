@@ -12,8 +12,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import toast from "react-hot-toast";
 import RegistrationFormField from "../registration-form-field";
+import { useRouter } from "next/navigation";
 
 export default function StudentRegistrationForm() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const form = useForm<TStudentSignupSchema>({
@@ -26,6 +28,8 @@ export default function StudentRegistrationForm() {
     setLoading(true);
     try {
       await axios.post(`http://localhost:3000/api/auth/register/student`, data);
+
+      router.push("/");
     } catch (error: any) {
       let message = "An error occurred while registering your account";
 

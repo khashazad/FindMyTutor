@@ -7,11 +7,15 @@ import MobileHeader from "./mobile-header";
 import UserNav from "./user-nav";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { Roles } from "@/lib/types/types";
 
 export default function SiteHeader() {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
 
   const isAuthenticated = status === "authenticated";
+
+  const isTutor = Number(session?.user.role) == Roles.TUTOR;
+
   return (
     <header className="sticky top-0 flex h-16 justify-between items-center gap-4 border-b bg-background px-4 md:px-6">
       {!isAuthenticated ? (
@@ -36,12 +40,31 @@ export default function SiteHeader() {
                 width={80}
               />
             </Link>
-            <Link
-              href="/tutors"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Browse Tutors
-            </Link>
+            {isTutor ? (
+              <div>
+                <Link
+                  href="/requests"
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  View Session Requests
+                </Link>
+              </div>
+            ) : (
+              <div className="flex gap-8">
+                <Link
+                  href="/tutors"
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  Browse Tutors
+                </Link>
+                <Link
+                  href="/requests"
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  Session Requests
+                </Link>
+              </div>
+            )}
           </nav>
           <MobileHeader />
         </div>

@@ -51,7 +51,7 @@ export default function BrowseTutorsPage() {
       setTutors(allAvailableTutors);
     } else {
       const filteredTutors = allAvailableTutors.filter((tutor) =>
-        tutor.expertise.some((expertise) => filter.includes(expertise)),
+        filter.every((filter) => tutor.expertise.includes(filter)),
       );
       setTutors(filteredTutors);
     }
