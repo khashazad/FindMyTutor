@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import TutoringRequest from "@/lib/models/tutoring-request";
+import TutoringRequest from "@/lib/models/session-request";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { Roles } from "@/lib/types/types";
