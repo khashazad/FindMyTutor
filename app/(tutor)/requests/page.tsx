@@ -1,4 +1,3 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { GET } from "@/app/api/request/route";
 import { TutoringSession } from "@/lib/models/tutoring-session";
@@ -7,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PendingRequests from "./pending-requests";
 import AcceptedRequests from "./accepted-requests";
 import DeclinedRequests from "./declined-requests";
+import { authOptions } from "@/lib/config/auth/authOptions";
 
 export default async function Requests() {
   const session = await getServerSession(authOptions);

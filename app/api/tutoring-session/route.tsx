@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import TutoringSession from "@/lib/models/tutoring-session";
-import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { Roles } from "@/lib/types/types";
 import { connect } from "@/lib/config/db-config";
 import { ObjectId } from "mongodb";
+import { authOptions } from "@/lib/config/auth/authOptions";
 
 connect();
 
