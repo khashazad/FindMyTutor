@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import TutoringRequest from "@/lib/models/tutoring-session";
-import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { Roles } from "@/lib/types/types";
 import { connect } from "@/lib/config/db-config";
+import { authOptions } from "@/lib/config/auth/authOptions";
 
 connect();
 

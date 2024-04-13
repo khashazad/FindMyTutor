@@ -3,7 +3,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { TimePicker } from "@/components/date-time-picker/time-picker";
 import { Button } from "@/components/ui/button";
 
-import * as moment from "moment";
+const moment = require("moment");
 
 import {
   Form,
