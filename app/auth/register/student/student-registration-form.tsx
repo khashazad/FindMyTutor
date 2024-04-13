@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import toast from "react-hot-toast";
-import RegistrationFormField from "../registration-form-field";
+import RegistrationFormField from "./student-registration-form-field";
 import { useRouter } from "next/navigation";
 
 export default function StudentRegistrationForm() {

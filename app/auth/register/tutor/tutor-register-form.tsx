@@ -28,7 +28,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Categories } from "@/lib/types/types";
-import RegistrationFormField from "../registration-form-field";
+import RegistrationFormField from "./tutor-registration-form-field";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Input } from "@/components/ui/input";
