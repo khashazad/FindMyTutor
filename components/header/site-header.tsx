@@ -46,7 +46,7 @@ export default function SiteHeader() {
                   href="/requests"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  View Session Requests
+                  Sessions
                 </Link>
               </div>
             ) : (
@@ -61,7 +61,7 @@ export default function SiteHeader() {
                   href="/requests"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Session Requests
+                  Sessions
                 </Link>
               </div>
             )}

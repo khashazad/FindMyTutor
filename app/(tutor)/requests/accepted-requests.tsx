@@ -2,15 +2,15 @@
 import { DataTable } from "@/components/table/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 import { zeroPad } from "@/lib/utils";
-import { SessionRequest } from "@/lib/models/session-request";
+import { TutoringSession } from "@/lib/models/tutoring-session";
 import { Card, CardContent } from "@/components/ui/card";
 
 type Props = {
-  requests: SessionRequest[];
+  requests: TutoringSession[];
 };
 
 export default function AcceptedRequests({ requests }: Props) {
-  const columns: ColumnDef<SessionRequest>[] = [
+  const columns: ColumnDef<TutoringSession>[] = [
     {
       accessorKey: "date",
       header: "Date",
@@ -44,7 +44,7 @@ export default function AcceptedRequests({ requests }: Props) {
   ];
 
   return (
-    <Card className="w-full md:w-2/3">
+    <Card className="w-full">
       <CardContent className="m-1 p-3 border-none dark:bg-slate-800/80">
         <DataTable
           columns={columns}

@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import TutoringRequest from "@/lib/models/tutoring-session";
+import TutoringSession from "@/lib/models/tutoring-session";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { Roles } from "@/lib/types/types";
 import { connect } from "@/lib/config/db-config";
+import { ObjectId } from "mongodb";
 
 connect();
 
@@ -17,7 +18,7 @@ export async function GET() {
 
   const filterKey = Number(role) != Roles.TUTOR ? "student" : "tutor";
 
-  const tutoringRequests = await TutoringRequest.find({ [filterKey]: id });
+  const tutoringRequests = await TutoringSession.find({ [filterKey]: id });
 
   return NextResponse.json(tutoringRequests, { status: 200 });
 }
@@ -39,7 +40,7 @@ export async function POST(request: NextRequest) {
   try {
     const { message, date, tutor, subject } = await request.json();
 
-    const tutoringRequest = new TutoringRequest({
+    const tutoringRequest = new TutoringSession({
       message,
       date,
       tutor,
@@ -60,8 +61,15 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
-  const { requestId, status } = await request.json();
-
+  const { sessionId, status } = await request.json();
+  console.log(sessionId, status);
   try {
-  } catch (error: any) {}
+    await TutoringSession.findByIdAndUpdate(new ObjectId(sessionId), {
+      $set: { status },
+    });
+
+    return NextResponse.json({ status: "success" });
+  } catch (error: any) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
+  }
 }

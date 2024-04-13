@@ -2,16 +2,18 @@
 import { DataTable } from "@/components/table/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 import { zeroPad } from "@/lib/utils";
-import { SessionRequest } from "@/lib/models/session-request";
+import { SessionStatus, TutoringSession } from "@/lib/models/tutoring-session";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { updateSessionStatus } from "@/actions";
+import toast from "react-hot-toast";
 
 type Props = {
-  requests: SessionRequest[];
+  requests: TutoringSession[];
 };
 
 export default function PendingRequests({ requests }: Props) {
-  const columns: ColumnDef<SessionRequest>[] = [
+  const columns: ColumnDef<TutoringSession>[] = [
     {
       accessorKey: "date",
       header: "Date",
@@ -45,12 +47,29 @@ export default function PendingRequests({ requests }: Props) {
     {
       id: "action",
       cell: ({ row }) => {
-        const request = row.original;
+        const session = row.original;
 
         return (
-          <div className="flex gap-x-3">
-            <Button variant="outline">Accept</Button>
-            <Button variant="outline">Decline</Button>
+          <div className="flex justify-center gap-x-3">
+            <Button
+              variant="outline"
+              className="text-black bg-green-400/80 dark:bg-green-600 hover:text-black hover:scale-105 transition "
+              onClick={async () => {
+                try {
+                  await updateSessionStatus(session._id, "accepted");
+                } catch (error: any) {
+                  toast.error((error as Error).message);
+                }
+              }}
+            >
+              Accept
+            </Button>
+            <Button
+              variant="outline"
+              className="text-black bg-red-400/80 dark:bg-red-600 hover:text-black hover:scale-105 transition "
+            >
+              Decline
+            </Button>
           </div>
         );
       },
@@ -58,7 +77,7 @@ export default function PendingRequests({ requests }: Props) {
   ];
 
   return (
-    <Card className="w-full md:w-2/3">
+    <Card className="w-full">
       <CardContent className="m-1 p-3 border-none dark:bg-slate-800/80">
         <DataTable
           columns={columns}

@@ -1,26 +1,23 @@
 import { Model, Schema, model, models, Types } from "mongoose";
 
-export type RequestStatus = "submitted" | "accepted" | "rejected";
+export type SessionStatus = "pending" | "accepted" | "declined";
 
-export interface SessionRequest extends Document {
+export interface TutoringSession extends Document {
   _id: string;
   message: string;
   date: Date;
   student: Types.ObjectId | Record<string, unknown>;
   tutor: Types.ObjectId | Record<string, unknown>;
   subject: string;
-  status: RequestStatus;
+  status: SessionStatus;
   response?: string;
 }
 
-interface SessionRequestModel extends Model<SessionRequest> {}
+interface TutoringSessionModel extends Model<TutoringSession> {}
 
-/**
- * Defines the schema for the User entity.
- */
-export const SessionRequestSchema = new Schema<
-  SessionRequest,
-  SessionRequestModel
+export const TutoringSessionSchema = new Schema<
+  TutoringSession,
+  TutoringSessionModel
 >(
   {
     message: { type: String, required: true },
@@ -28,7 +25,7 @@ export const SessionRequestSchema = new Schema<
     student: { type: Types.ObjectId, required: true, ref: "User" },
     tutor: { type: Types.ObjectId, required: true, ref: "User" },
     subject: { type: String, required: true },
-    status: { type: String, required: true, default: "submitted" },
+    status: { type: String, required: true, default: "pending" },
     response: { type: String, required: false },
   },
   {
@@ -36,4 +33,5 @@ export const SessionRequestSchema = new Schema<
   },
 );
 
-export default models.Request || model("Request", SessionRequestSchema);
+export default models.TutoringSession ||
+  model("TutoringSession", TutoringSessionSchema);

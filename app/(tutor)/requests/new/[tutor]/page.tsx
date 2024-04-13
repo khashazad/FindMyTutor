@@ -27,13 +27,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Categories } from "@/lib/types/types";
 import { cn } from "@/lib/utils";
 import {
-  TTutoringRequest,
-  tutoringRequest,
+  TTutoringSession,
+  tutoringSession,
 } from "@/lib/validations/tutoring-request-validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { CalendarIcon } from "lucide-react";
-import { redirect, useParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -63,17 +63,17 @@ export default function CreateRequestPage() {
     fetchTutor();
   });
 
-  const form = useForm<TTutoringRequest>({
-    resolver: zodResolver(tutoringRequest),
+  const form = useForm<TTutoringSession>({
+    resolver: zodResolver(tutoringSession),
   });
 
   const [loading, setLoading] = useState(false);
   const { handleSubmit } = form;
 
-  const onSubmit = async (data: TTutoringRequest) => {
+  const onSubmit = async (data: TTutoringSession) => {
     setLoading(true);
     try {
-      await axios.post(`http://localhost:3000/api/request`, {
+      await axios.post(`http://localhost:3000/api/tutoring-session`, {
         ...data,
         tutor: tutorId,
       });

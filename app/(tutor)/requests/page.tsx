@@ -1,7 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { GET } from "@/app/api/request/route";
-import { SessionRequest } from "@/lib/models/session-request";
+import { TutoringSession } from "@/lib/models/tutoring-session";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PendingRequests from "./pending-requests";
@@ -12,13 +12,13 @@ export default async function Requests() {
   const session = await getServerSession(authOptions);
   const response = await GET();
 
-  let requests: SessionRequest[] = [];
+  let requests: TutoringSession[] = [];
   if (response.status == 200)
-    requests = (await response.json()) as SessionRequest[];
+    requests = (await response.json()) as TutoringSession[];
 
-  const pendingRequests = requests.filter((req) => req.status == "submitted");
+  const pendingRequests = requests.filter((req) => req.status == "pending");
   const acceptedRequests = requests.filter((req) => req.status == "accepted");
-  const declinedRequests = requests.filter((req) => req.status == "rejected");
+  const declinedRequests = requests.filter((req) => req.status == "declined");
 
   return (
     <div className="flex flex-1 flex-col justify-between p-4 space-y-8 md:p-10">
