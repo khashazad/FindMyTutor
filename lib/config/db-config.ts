@@ -1,14 +1,7 @@
-import mongoose from "mongoose";
+"use server";
+const mongoose = require("mongoose");
 
-const MONGODB_URI = process.env.MONGO_URI;
-
-if (!MONGODB_URI) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local",
-  );
-}
-
-const { MONGO_URI } = process.env;
+const MONGO_URI = process.env.MONGO_URI;
 
 if (!MONGO_URI) throw new Error("MONGODB_DB not defined");
 
@@ -24,7 +17,7 @@ export async function connect() {
   if (!cached.promise) {
     cached.promise = mongoose
       .connect(`${MONGO_URI}}`)
-      .then((mongoose) => mongoose);
+      .then((mongoose: any) => mongoose);
   }
 
   cached.conn = await cached.promise;

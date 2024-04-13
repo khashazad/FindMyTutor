@@ -16,10 +16,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { connect } from "@/lib/config/db-config";
 
 export default async function Home() {
-  connect();
   return (
     <main className="relative -z-10">
       <PageHeader>
