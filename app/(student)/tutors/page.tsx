@@ -33,10 +33,12 @@ export default function BrowseTutorsPage() {
 
         setAllAvailableTutors(response.data);
       } catch (error: any) {
-        let message = "An error occurred while registering your account";
+        let message = "An error occurred while fetching tutors";
 
         if (error.response && error.response.data.message)
           message = error.response.data.message;
+
+        console.log(error);
 
         toast.error(message);
       } finally {
