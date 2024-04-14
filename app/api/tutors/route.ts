@@ -5,6 +5,8 @@ import { connect } from "@/lib/config/db-config";
 
 connect();
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const tutors: User[] = await UserModel.find({ role: Roles.TUTOR });
