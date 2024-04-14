@@ -4,14 +4,40 @@ import { ColumnDef } from "@tanstack/react-table";
 import { zeroPad } from "@/lib/utils";
 import { TutoringSession } from "@/lib/models/tutoring-session";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 type Props = {
   requests: TutoringSession[];
 };
 
-export default function DeclinedRequests({ requests }: Props) {
+export default function Sessions({ requests }: Props) {
   const columns: ColumnDef<TutoringSession>[] = [
+    {
+      accessorKey: "tutor",
+      header: "Tutor",
+      cell: ({ row }) => {
+        const tutor = row.original.tutor as Record<string, unknown>;
+
+        return <div>{`${tutor.firstName} ${tutor.lastName}`}</div>;
+      },
+    },
+    {
+      accessorKey: "tutor",
+      header: "Phone Number",
+      cell: ({ row }) => {
+        const tutor = row.original.tutor as Record<string, unknown>;
+
+        return <div>{`${tutor.phoneNumber}`}</div>;
+      },
+    },
+    {
+      accessorKey: "tutor",
+      header: "Email",
+      cell: ({ row }) => {
+        const tutor = row.original.tutor as Record<string, unknown>;
+
+        return <div>{`${tutor.email}`}</div>;
+      },
+    },
     {
       accessorKey: "date",
       header: "Date",
@@ -32,7 +58,7 @@ export default function DeclinedRequests({ requests }: Props) {
             {`${new Date(startDate).getHours()}:${zeroPad(
               new Date(startDate).getMinutes(),
               2,
-            )}`}
+            )}`}{" "}
           </span>
         );
       },

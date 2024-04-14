@@ -18,7 +18,24 @@ export async function GET() {
 
   const filterKey = Number(role) != Roles.TUTOR ? "student" : "tutor";
 
-  const tutoringRequests = await TutoringSession.find({ [filterKey]: id });
+  const tutoringRequests = await TutoringSession.aggregate()
+    .match({ [filterKey]: new ObjectId(id) })
+    .lookup({
+      from: "users",
+      localField: "student",
+      foreignField: "_id",
+      as: "student",
+    })
+    .lookup({
+      from: "users",
+      localField: "tutor",
+      foreignField: "_id",
+      as: "tutor",
+    })
+    .unwind("tutor", "student")
+    .exec();
+
+  console.log(tutoringRequests);
 
   return NextResponse.json(tutoringRequests, { status: 200 });
 }
@@ -62,7 +79,6 @@ export async function POST(request: NextRequest) {
 
 export async function PATCH(request: NextRequest) {
   const { sessionId, status } = await request.json();
-  console.log(sessionId, status);
   try {
     await TutoringSession.findByIdAndUpdate(new ObjectId(sessionId), {
       $set: { status },

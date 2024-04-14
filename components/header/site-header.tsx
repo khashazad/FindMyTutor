@@ -43,7 +43,7 @@ export default function SiteHeader() {
             {isTutor ? (
               <div>
                 <Link
-                  href="/requests"
+                  href="/sessions"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
                   Sessions
@@ -58,10 +58,10 @@ export default function SiteHeader() {
                   Browse Tutors
                 </Link>
                 <Link
-                  href="/requests"
+                  href="/my-sessions"
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Sessions
+                  My Sessions
                 </Link>
               </div>
             )}

@@ -209,7 +209,7 @@ export default function CreateRequestPage() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {Categories.map((cat) => (
+                          {tutor?.expertise.map((cat) => (
                             <SelectItem value={cat}>{cat}</SelectItem>
                           ))}
                         </SelectContent>

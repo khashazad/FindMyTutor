@@ -1,11 +1,11 @@
 import { getServerSession } from "next-auth";
-import { GET } from "@/app/api/request/route";
+import { GET } from "@/app/api/tutoring-session/route";
 import { TutoringSession } from "@/lib/models/tutoring-session";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import PendingRequests from "./pending-requests";
-import AcceptedRequests from "./accepted-requests";
-import DeclinedRequests from "./declined-requests";
+import PendingRequests from "./pending-sessions";
+import AcceptedRequests from "./upcoming-sessions";
+import DeclinedRequests from "./declined-sessions";
 import { authOptions } from "@/lib/config/auth/authOptions";
 
 export default async function Requests() {
@@ -16,9 +16,16 @@ export default async function Requests() {
   if (response.status == 200)
     requests = (await response.json()) as TutoringSession[];
 
-  const pendingRequests = requests.filter((req) => req.status == "pending");
-  const acceptedRequests = requests.filter((req) => req.status == "accepted");
-  const declinedRequests = requests.filter((req) => req.status == "declined");
+  const pendingSessions = requests.filter((req) => req.status == "pending");
+  const upcomingSessions = requests.filter(
+    (req) =>
+      req.status == "accepted" && new Date(req.date).getTime() >= Date.now(),
+  );
+  const pastSessions = requests.filter(
+    (req) =>
+      req.status == "accepted" && new Date(req.date).getTime() < Date.now(),
+  );
+  const declinedSessions = requests.filter((req) => req.status == "declined");
 
   return (
     <div className="flex flex-1 flex-col justify-between p-4 space-y-8 md:p-10">

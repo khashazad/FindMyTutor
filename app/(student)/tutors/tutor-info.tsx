@@ -39,19 +39,22 @@ export default function TutorInfo({ tutor }: TutorInfoProps) {
           orientation="horizontal"
         />
         <SectionHeader title={`About`} />
-        <div className="-m-2 text-center bg-white/50 text-black dark:text-white dark:bg-white/20 rounded-md px-4 py-2 text-md font-semibold tracking-wide shadow-black/20 dark:shadow-black/80 shadow-sm flex-1">
+        <div className="-m-2 text-center bg-white/50 text-black dark:text-white dark:bg-white/20 rounded-md px-4 py-2 text-md font-semibold tracking-wide shadow-black/20 dark:shadow-black/80 shadow-sm flex-1 min-h-[150px]">
           {tutor.about}
         </div>
         <Separator
           className="mt-6 h-[0.20rem] bg-black/30"
           orientation="horizontal"
         />
-        <Button
-          variant="outline"
-          className="bg-primary-foreground/80 text-md grow font-semibold"
-        >
-          <Link href={`/requests/new/${tutor._id}`}>Request Session</Link>
-        </Button>
+
+        <Link href={`/sessions/new/${tutor._id}`} className="grow ">
+          <Button
+            variant="outline"
+            className="bg-primary-foreground/80 text-md font-semibold w-full"
+          >
+            Request Session
+          </Button>
+        </Link>
       </CardContent>
     </Card>
   );
