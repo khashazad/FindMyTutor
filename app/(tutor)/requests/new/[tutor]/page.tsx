@@ -63,7 +63,7 @@ export default function CreateRequestPage() {
       }
     }
     fetchTutor();
-  });
+  }, [tutorId]);
 
   const form = useForm<TTutoringSession>({
     resolver: zodResolver(tutoringSession),

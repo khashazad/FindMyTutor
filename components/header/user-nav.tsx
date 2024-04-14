@@ -12,9 +12,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function UserNav() {
   const { data } = useSession();
+  const router = useRouter();
   const name = data?.user.name as string;
 
   return (
@@ -41,7 +43,14 @@ export default function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>Log out </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={async () => {
+            const _ = await signOut({ redirect: false });
+            router.push("/");
+          }}
+        >
+          Log out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
