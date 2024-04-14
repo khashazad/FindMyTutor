@@ -7,3 +7,10 @@ export const tutoringSession = object({
 });
 
 export type TTutoringSession = TypeOf<typeof tutoringSession>;
+
+export const declineSession = object({
+  session: string(),
+  reason: string().optional(),
+});
+
+export type TDeclineSession = TypeOf<typeof declineSession>;

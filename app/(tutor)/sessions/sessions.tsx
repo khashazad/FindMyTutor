@@ -9,8 +9,35 @@ type Props = {
   requests: TutoringSession[];
 };
 
-export default function AcceptedRequests({ requests }: Props) {
+export default function Sessions({ requests }: Props) {
   const columns: ColumnDef<TutoringSession>[] = [
+    {
+      accessorKey: "student",
+      header: "Student",
+      cell: ({ row }) => {
+        const student = row.original.student as Record<string, unknown>;
+
+        return <div>{`${student.firstName} ${student.lastName}`}</div>;
+      },
+    },
+    {
+      accessorKey: "student",
+      header: "Phone Number",
+      cell: ({ row }) => {
+        const student = row.original.student as Record<string, unknown>;
+
+        return <div>{`${student.phoneNumber}`}</div>;
+      },
+    },
+    {
+      accessorKey: "student",
+      header: "Email",
+      cell: ({ row }) => {
+        const student = row.original.student as Record<string, unknown>;
+
+        return <div>{`${student.email}`}</div>;
+      },
+    },
     {
       accessorKey: "date",
       header: "Date",
@@ -31,7 +58,7 @@ export default function AcceptedRequests({ requests }: Props) {
             {`${new Date(startDate).getHours()}:${zeroPad(
               new Date(startDate).getMinutes(),
               2,
-            )}`}
+            )}`}{" "}
           </span>
         );
       },

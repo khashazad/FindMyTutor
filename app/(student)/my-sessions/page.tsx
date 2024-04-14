@@ -40,7 +40,7 @@ export default async function Requests() {
           </p>
         </div>
       </div>
-      <div className="mx-2 md:mx-10 flex justify-center flex-wrap gap-4 w-full">
+      <div className="flex flex-wrap gap-4 w-full">
         {requests.length == 0 ? (
           <h1>No Requests found</h1>
         ) : (

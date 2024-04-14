@@ -6,11 +6,13 @@ import { SessionStatus } from "./lib/models/tutoring-session";
 export async function updateSessionStatus(
   sessionId: string,
   status: SessionStatus,
+  reason?: string,
 ) {
   try {
     await axios.patch(`http://localhost:3000/api/tutoring-session`, {
       sessionId,
       status,
+      reason,
     });
   } catch (error: any) {
     let message =

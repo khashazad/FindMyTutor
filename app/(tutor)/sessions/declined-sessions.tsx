@@ -9,7 +9,7 @@ type Props = {
   requests: TutoringSession[];
 };
 
-export default function PendingSessions({ requests }: Props) {
+export default function DeclinedSessions({ requests }: Props) {
   const columns: ColumnDef<TutoringSession>[] = [
     {
       accessorKey: "tutor",
@@ -20,6 +20,7 @@ export default function PendingSessions({ requests }: Props) {
         return <div>{`${tutor.firstName} ${tutor.lastName}`}</div>;
       },
     },
+
     {
       accessorKey: "date",
       header: "Date",
@@ -45,14 +46,13 @@ export default function PendingSessions({ requests }: Props) {
         );
       },
     },
-
     {
       accessorKey: "subject",
       header: "Subject",
     },
     {
-      accessorKey: "message",
-      header: "Message",
+      accessorKey: "response",
+      header: "Reason",
     },
   ];
 

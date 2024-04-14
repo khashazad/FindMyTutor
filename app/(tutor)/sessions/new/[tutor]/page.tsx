@@ -79,7 +79,7 @@ export default function CreateRequestPage() {
         ...data,
         tutor: tutorId,
       });
-      router.push("/requests");
+      router.push("/my-sessions");
     } catch (error: any) {
       let message = "An error occurred while registering your account";
 

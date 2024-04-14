@@ -3,10 +3,14 @@ import { GET } from "@/app/api/tutoring-session/route";
 import { TutoringSession } from "@/lib/models/tutoring-session";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import PendingRequests from "./pending-sessions";
-import AcceptedRequests from "./upcoming-sessions";
-import DeclinedRequests from "./declined-sessions";
+import PendingSessions from "./session-requests";
+import AcceptedSessions from "./sessions";
+import DeclinedSession from "./declined-sessions";
 import { authOptions } from "@/lib/config/auth/authOptions";
+import Sessions from "./sessions";
+import { PersonStanding } from "lucide-react";
+import SessionRequests from "./session-requests";
+import DeclinedSessions from "./declined-sessions";
 
 export default async function Requests() {
   const session = await getServerSession(authOptions);
@@ -43,20 +47,24 @@ export default async function Requests() {
         {requests.length == 0 ? (
           <h1>No Requests found</h1>
         ) : (
-          <Tabs defaultValue="pending" className="w-full md:w-2/3">
-            <TabsList className="grid grid-cols-3">
-              <TabsTrigger value="pending">Pending</TabsTrigger>
-              <TabsTrigger value="accepted">Accepted</TabsTrigger>
+          <Tabs defaultValue="pending" className="w-full mx-4">
+            <TabsList className="grid grid-cols-4">
+              <TabsTrigger value="requests">Requests</TabsTrigger>
+              <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
+              <TabsTrigger value="past">Past</TabsTrigger>
               <TabsTrigger value="declined">Declined</TabsTrigger>
             </TabsList>
-            <TabsContent value="pending" className="flex justify-center">
-              <PendingRequests requests={pendingRequests} />
+            <TabsContent value="requests" className="flex justify-center">
+              <SessionRequests requests={pendingSessions} />
             </TabsContent>
-            <TabsContent value="accepted" className="flex justify-center">
-              <AcceptedRequests requests={acceptedRequests} />
+            <TabsContent value="upcoming" className="flex justify-center">
+              <Sessions requests={upcomingSessions} />
+            </TabsContent>
+            <TabsContent value="past" className="flex justify-center">
+              <Sessions requests={pastSessions} />
             </TabsContent>
             <TabsContent value="declined" className="flex justify-center">
-              <DeclinedRequests requests={declinedRequests} />
+              <DeclinedSessions requests={declinedSessions} />
             </TabsContent>
           </Tabs>
         )}
