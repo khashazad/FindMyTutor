@@ -17,6 +17,8 @@ import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import LoadingSpinner from "@/components/loading-spinner";
 
+export const dynamic = "force-dynamic";
+
 export default function BrowseTutorsPage() {
   const [allAvailableTutors, setAllAvailableTutors] = useState<User[]>([]);
   const [tutors, setTutors] = useState<User[]>([]);
@@ -37,8 +39,6 @@ export default function BrowseTutorsPage() {
 
         if (error.response && error.response.data.message)
           message = error.response.data.message;
-
-        console.log(error);
 
         toast.error(message);
       } finally {

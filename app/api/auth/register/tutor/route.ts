@@ -27,6 +27,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const userWithSamePhoneNumber = await User.findOne({ phoneNumber });
+
+    if (userWithSamePhoneNumber) {
+      return NextResponse.json(
+        { message: "User already exists with this phoneNumber" },
+        { status: 400 },
+      );
+    }
+
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
 

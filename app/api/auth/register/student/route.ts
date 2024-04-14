@@ -14,7 +14,16 @@ export async function POST(request: NextRequest) {
 
     if (user) {
       return NextResponse.json(
-        { error: "User already exists with this email" },
+        { message: "User already exists with this email" },
+        { status: 400 },
+      );
+    }
+
+    const userWithSamePhoneNumber = await User.findOne({ phoneNumber });
+
+    if (userWithSamePhoneNumber) {
+      return NextResponse.json(
+        { message: "User already exists with this phoneNumber" },
         { status: 400 },
       );
     }
@@ -39,6 +48,6 @@ export async function POST(request: NextRequest) {
       savedUser,
     });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
