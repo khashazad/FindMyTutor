@@ -75,7 +75,7 @@ export default function CreateRequestPage() {
   const onSubmit = async (data: TTutoringSession) => {
     setLoading(true);
     try {
-      await axios.post(`${process.env.API_URL}/api/tutoring-session`, {
+      await axios.post(`${process.env.API_URL}/tutoring-session`, {
         ...data,
         tutor: tutorId,
       });
