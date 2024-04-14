@@ -75,6 +75,11 @@ export default function SessionRequests({ requests }: Props) {
       header: "Subject",
     },
     {
+      accessorKey: "message",
+      header: "Message",
+    },
+
+    {
       id: "action",
       cell: ({ row }) => {
         const session = row.original;
