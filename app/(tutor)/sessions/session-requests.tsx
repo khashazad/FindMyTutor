@@ -87,6 +87,7 @@ export default function SessionRequests({ requests }: Props) {
               onClick={async () => {
                 try {
                   await updateSessionStatus(session._id, "accepted");
+                  router.refresh();
                 } catch (error: any) {
                   toast.error((error as Error).message);
                 }
