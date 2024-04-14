@@ -9,7 +9,7 @@ export async function updateSessionStatus(
   reason?: string,
 ) {
   try {
-    await axios.patch(`http://localhost:3000/api/tutoring-session`, {
+    await axios.patch(`${process.env.API_URL}/tutoring-session`, {
       sessionId,
       status,
       response: reason,

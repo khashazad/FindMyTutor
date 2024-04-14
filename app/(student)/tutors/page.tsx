@@ -29,7 +29,7 @@ export default function BrowseTutorsPage() {
     async function fetchTutors() {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:3000/api/tutors`);
+        const response = await axios.get(`${process.env.API_URL}/tutors`);
 
         setAllAvailableTutors(response.data);
       } catch (error: any) {

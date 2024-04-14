@@ -48,7 +48,7 @@ export default function TutorRegistrationForm() {
   const onSubmit = async (data: TTutorSignupSchema) => {
     setLoading(true);
     try {
-      await axios.post(`http://localhost:3000/api/auth/register/tutor`, {
+      await axios.post(`${process.env.API_URL}/auth/register/tutor`, {
         ...data,
         expertise,
       });

@@ -27,7 +27,7 @@ export default function StudentRegistrationForm() {
   const onSubmit = async (data: TStudentSignupSchema) => {
     setLoading(true);
     try {
-      await axios.post(`http://localhost:3000/api/auth/register/student`, data);
+      await axios.post(`${process.env.API_URL}/auth/register/student`, data);
 
       router.push("/");
     } catch (error: any) {
