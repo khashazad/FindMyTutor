@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 type Props = {
   requests: TutoringSession[];
@@ -30,11 +31,15 @@ export default function SessionRequests({ requests }: Props) {
     resolver: zodResolver(declineSession),
   });
 
+  const router = useRouter();
+
   const { register, handleSubmit } = form;
 
   const onSubmit = async (data: TDeclineSession) => {
     try {
       await updateSessionStatus(data.session, "declined", data.reason);
+
+      router.refresh();
     } catch (error: any) {
       toast.error((error as Error).message);
     }

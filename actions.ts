@@ -12,7 +12,7 @@ export async function updateSessionStatus(
     await axios.patch(`http://localhost:3000/api/tutoring-session`, {
       sessionId,
       status,
-      reason,
+      response: reason,
     });
   } catch (error: any) {
     let message =

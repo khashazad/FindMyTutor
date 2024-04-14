@@ -35,8 +35,6 @@ export async function GET() {
     .unwind("tutor", "student")
     .exec();
 
-  console.log(tutoringRequests);
-
   return NextResponse.json(tutoringRequests, { status: 200 });
 }
 
@@ -78,10 +76,11 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
-  const { sessionId, status } = await request.json();
+  const { sessionId, status, response } = await request.json();
+
   try {
     await TutoringSession.findByIdAndUpdate(new ObjectId(sessionId), {
-      $set: { status },
+      $set: { status, response },
     });
 
     return NextResponse.json({ status: "success" });

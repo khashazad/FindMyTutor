@@ -12,16 +12,6 @@ type Props = {
 export default function DeclinedSessions({ requests }: Props) {
   const columns: ColumnDef<TutoringSession>[] = [
     {
-      accessorKey: "tutor",
-      header: "Tutor",
-      cell: ({ row }) => {
-        const tutor = row.original.tutor as Record<string, unknown>;
-
-        return <div>{`${tutor.firstName} ${tutor.lastName}`}</div>;
-      },
-    },
-
-    {
       accessorKey: "date",
       header: "Date",
       cell: ({ row }) => {
@@ -49,10 +39,6 @@ export default function DeclinedSessions({ requests }: Props) {
     {
       accessorKey: "subject",
       header: "Subject",
-    },
-    {
-      accessorKey: "response",
-      header: "Reason",
     },
   ];
 

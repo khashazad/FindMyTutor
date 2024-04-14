@@ -13,7 +13,7 @@ export function StarRating({ rating }: StarRatingProps) {
           <label key={idx}>
             <FaStar
               className="text-lg"
-              color={idx < rating ? "#01af93" : "#bbb"}
+              color={idx < rating ? "#FFA500" : "#bbb"}
             />
           </label>
         ))}
