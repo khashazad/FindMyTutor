@@ -44,7 +44,7 @@ export default async function Requests() {
         {requests.length == 0 ? (
           <h1>No Requests found</h1>
         ) : (
-          <Tabs defaultValue="pending" className="mx-4 w-full">
+          <Tabs defaultValue="pending" className="md:mx-4 w-full">
             <TabsList className="grid grid-cols-4">
               <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
               <TabsTrigger value="pending">Requested</TabsTrigger>

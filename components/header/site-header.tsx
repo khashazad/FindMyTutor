@@ -21,9 +21,10 @@ export default function SiteHeader() {
       {!isAuthenticated ? (
         <div className="flex gap-2 md:gap-4 items-center">
           <h1>Welcome to Find My Tutor</h1>
-          <Button>
-            <Link href="/auth/login">Get Started</Link>
-          </Button>
+
+          <Link href="/auth/login">
+            <Button>Get Started</Button>
+          </Link>
         </div>
       ) : (
         <div>
