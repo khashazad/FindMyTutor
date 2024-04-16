@@ -1,4 +1,4 @@
-```markdown
+
 # Find My Tutor
 
 This repository contains the prototype for **Find My Tutor**, a web application designed to connect students with tutors. It leverages Next.js for a dynamic, server-side rendered user experience and MongoDB for efficient data management.
@@ -32,7 +32,8 @@ To get a local copy up and running, follow these simple steps.
    ```sh
    git clone https://github.com/your_username_/Tutor-Match.git
    ```
-2. Install NPM packages
+
+2. Install dependency packages
    ```sh
    pnpm install
    ```
